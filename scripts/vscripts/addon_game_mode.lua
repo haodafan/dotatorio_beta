@@ -12,6 +12,8 @@ function Precache( context )
 			PrecacheResource( "particle", "*.vpcf", context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
 	]]
+	--PrecacheResource( "model", "*.vmdl", context )
+	PrecacheUnitByNameSync("dotatorio_barracks", context)
 end
 
 -- Create the game mode when we activate
@@ -23,6 +25,14 @@ end
 function CAddonTemplateGameMode:InitGameMode()
 	print( "Template addon is loaded." )
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
+
+	-- custom code
+	local barracks = CreateUnitByName("dotatorio_barracks", Vector(0, 0, 0), true, nil, nil, DOTA_TEAM_GOODGUYS)
+
+	local pos1 = Vector(1000, 0, 0)
+
+	barracks:SetAbsOrigin(pos1)
+
 end
 
 -- Evaluate the state of the game
